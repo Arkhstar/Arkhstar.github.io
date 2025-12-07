@@ -1,14 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-  </head>
-  <body>
-    <h1>Web Title</h1>
-    <h2>Projects</h2>
-    <h3>Games</h3>
-    <a href="./SanguinePenitence">Sanguine Penitence</a>
-  </body>
+<html lang="en" mode="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Portfolio &ndash; Benjamin Coberly</title>
+        <link rel="stylesheet" href="styles.css"/>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <h1 class="text-centered">Benjamin Coberly</h1>
+                <div class="nav-bar">
+                    <nav class="nav-links">
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contacts">Contacts</a>
+                    </nav>
+                    <button id="mode-toggle" aria-label="Toggle Mode">&#9671;</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section id="about" class="section">
+                <div class="container">
+                    <h2 class="title">About Me</h2>
+                    <article>
+                        <p>
+                            I'm a student at Iowa State University, double majoring in Computer
+                            Science and Applied Mathematics.
+                        </p>
+                    </article>
+                </div>
+            </section>
+            <section id="projects" class="section">
+                <div class="container">
+                    <h2 class="title">Projects</h2>
+                    <h3 class="subtitle">Research</h3>
+                    <div class="grid">
+                        <article>
+                            <h4 class="text-centered">BoolForge</h4>
+                            <p>
+                                BoolForge is a python package made to generate and analyze random
+                                Boolean functions and networks, with a focus on the concept of canalization.
+                                Developed under the mentorship of and in collaboration with
+                                <a href="https://faculty.sites.iastate.edu/ckadelka/">Dr. Claus Kadelka</a>.
+                            </p>
+                            <nav class="nav-links">
+                                <a href="https://github.com/ckadelka/BoolForge/">Repository</a>
+                                <a href="https://ckadelka.github.io/BoolForge/">Documentation</a>
+                            </nav>
+                        </article>
+                    </div>
+                    <div style="min-height: 1rem;"></div>
+                    <h3 class="subtitle">Video Games</h3>
+                    <div class="grid">
+                        <article>
+                            <h4 class="text-centered">Sanguine Penitence</h4>
+                            <p>
+                                Sanguine Penitence is a dark fantasy adventure exploration game where you must
+                                wander cursed wilds, hunting fell beasts for coin. Hunt, sacrifice, and survive
+                                in a world where the gods who reign never sleep.
+                            </p>
+                            <nav class="nav-links">
+                                <a href="https://github.com/Arkhstar/SanguinePenitence">Repository</a>
+                                <a href="https://arkhstar.github.io/SanguinePenitence/">Info Page</a>
+                                <a href="https://www.youtube.com/playlist?list=PL-U76qja-eQRMND9OwjXtSdVvitpuOssW">OST</a>
+                            </nav>
+                        </article>
+                    </div>
+                </div>
+            </section>
+            <section id="contacts" class="section">
+                <div class="container">
+                    <h2 class="title">Contacts</h2>
+                    <article>
+                        <nav class="nav-links" style="justify-content: center;">
+                            <p>Email: <a href="mailto:bencoberly@icloud.com">bencoberly@icloud.com</a></p>
+                            <p>LinkedIn: <a href="https://www.linkedin.com/in/benjamin-coberly-948b63352/">Benjamin Coberly</a></p>
+                        </nav>
+                    </article>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; <span id="year"></span> Benjamin Coberly</p>
+            </div>
+            <script>
+                // Set copy year
+                document.getElementById('year').textContent = new Date().getFullYear();
+
+                // Dark/Light Mode
+                const toggle = document.getElementById('mode-toggle');
+                const tooltip = document.getElementById('mode-toggle-tooltip');
+                const root = document.documentElement;
+                let toggleAngle = 0;
+                function setMode(m) {
+                    root.setAttribute('mode', m);
+                    toggle.innerHTML = m === 'dark' ? '&#9671;' : '&#9670;';
+                    toggleAngle += 90
+                    toggle.style.transform = `rotate(${toggleAngle}deg)`;
+                    localStorage.setItem('mode', m);
+                }
+                const saved = localStorage.getItem('mode') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') || 'dark';
+                setMode(saved);
+
+                // Dark/Light Mode Toggle Button
+                toggle.addEventListener('click', () => {
+                    const current = root.getAttribute('mode');
+                    setMode(current === 'dark' ? 'light' : 'dark');
+                });
+            </script>
+        </footer>
+    </body>
 </html>
